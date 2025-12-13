@@ -1,0 +1,2 @@
+prefix,instance,thld_delta,trial_id,C,MAX_ITER,best_cost,reached_opt,best_iter
+uf20,2,0.001,1,91,50000,91,1,1809
