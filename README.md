@@ -8,6 +8,7 @@ This repository contains the **data and code** used in several experiments from 
 
 - **CPU simulation code** for two variants of the *neuromorphic higher-order Ising machine* discussed in the paper.
 - **NeuroSA solver code** for solving **quadratized SAT** problems.
+- **Hardware RTL code** for FPGA implementation of the solver modules.
 - A **data** folder containing recorded results from:
   - **FPGA experiments**
   - **CPU experiments**
