@@ -858,3 +858,9 @@ doi={10.1038/s41467-026-71937-4},
 url={https://doi.org/10.1038/s41467-026-71937-4}
 }
 ```
+
+## License
+
+Except where otherwise noted, original material in this repository is licensed under the [Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) License](https://creativecommons.org/licenses/by-nc/4.0/). See the [LICENSE](LICENSE) file for the full license text.
+
+You are free to share and adapt the licensed material for non-commercial purposes, provided that appropriate credit is given and any changes are indicated. Third-party materials remain subject to their respective licenses.
