@@ -59,3 +59,27 @@ The following RTL modules are required for integration and synthesis:
 * `top_solver_axi.v`: top-level hardware wrapper providing AXI4-Stream interfaces and connectivity to the processing system.
 
 ---
+
+## Noise scaling: software rule vs. RTL comparator
+
+Software (reference) rule: a flip is accepted when ΔE < noise. With
+`q_cal = 2a − colsum` (the local field; `a = Σ H·T_bin`), a flip changes the energy by
+ΔE = 2·q_cal, so the rule is
+
+    q_cal < 0.5 · w_int16,     w_int16 = trunc(v)
+
+where `v = −A·ln(U + ε) / (C·ln(1 + t/C))`.
+
+RTL: `generate_verilog_scripts.py` emits `(a <<< 1) < noisethld_adj`, with
+`noisethld_adj = w + colsum`. This is `2a − colsum < w`, i.e. `q_cal < w`.
+(The Verilog's `q_cal` is the raw adder-tree sum `a`, not `2a − colsum`.)
+
+Consequence: streaming the same integer `w_int16` to the RTL gives an effective
+temperature twice as high as the software rule.
+
+Required host-side conversion: to make the RTL implement ΔE < noise, the host streams
+
+    w_host = 0.5 · w_int16 = ceil(trunc(v) / 2) = floor(v / 2 + 1/2)
+
+(round-half-up). A plain right shift, `trunc(v/2)`, is not equivalent: for odd
+`trunc(v)` it rejects equal-energy moves (`q_cal = 0`) that the software rule accepts.
